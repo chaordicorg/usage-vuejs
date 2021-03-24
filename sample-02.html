@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>sample-02</title>
+	<script>window.Promise || document.write('<script src="//www.promisejs.org/polyfills/promise-7.0.4.min.js"><\/script>');</script>
+
+	<!--* vue.js *-->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- vue用ajaxライブラリ -->
+
+	<!--* bootstrap-vue
+		https://bootstrap-vue.org/ *-->
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+
+	<!--* highlight.js
+		https://highlightjs.org/
+		https://qiita.com/tadnakam/items/99088d78512a20e75ff3 *-->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/railscasts.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+	<script>
+	hljs.configure({
+		tabReplace: '    ', // スペース4つ
+	})
+	hljs.initHighlightingOnLoad();
+	</script>
+
+	<style>
+	</style>
+</head>
+<body>
+<div class="container">
+	<h5>■ Vue.jsの基礎</h5>
+	<section>
+		| <a href="sample-01.html">sample-01</a> |
+		  sample-02 |
+		  <a href="sample-03.html">sample-03</a> |
+		  <a href="bootstrap-vue.html">bootstrap-vue</a> |
+	</section>
+	<h1>sample-02：属性バインディングとリストデータとフィルター</h1>
+
+<p>headにCDNで開発バージョンのVue2を読み込む。※公開時にはエラー出力されない本番用を使う</p>
+<pre><code>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</code></pre>
+
+<p>v-for="(要素, インデックス番号) in オブジェクト"でリストを繰り返し表示</p>
+<p>属性へのバインディングはv-bind:属性="リアクティブ・データ"</p>
+<p>｜（パイプ）で連結してフィルターをかける</p>
+<pre><code>
+<table>
+	<thead>
+		<tr>
+			<th>番号</th>
+			<th>ジャンル</th>
+			<th>タイトル</th>
+			<th>公開日</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr v-for="(item, index) in list">
+			<td>{{ item.sn }}</td>
+			<td>{{ item.genre }}</td>
+			<td>
+				<a v-bind:href="item.url" target="_blank">{{ item.title }}</a>
+			</td>
+			<td>{{ item.opendate | filter_date }}</td>
+		</tr>
+	</tbody>
+</table>
+</code></pre>
+
+<p>filters: バインディング時にデータを加工する処理</p>
+<pre><code>
+var app = new Vue({
+	el: '#app',
+	data:{
+		list:[
+			{sn: 1, genre: "SF", title: "スターウォーズ", opendate: "1977-5-25", url:"https://eiga.com/movie/45857/"},
+			{sn: 2, genre: "HORROR", title: "シャイニング", opendate: "1980-5-23", url:"https://eiga.com/movie/14352/"},
+			{sn: 3, genre: "DRAMA", title: "スタンド・バイ・ミー", opendate: "1986-8-22", url:"https://eiga.com/movie/45887/"},
+			{sn: 4, genre: "COMEDY", title: "ブルース・ブラザース", opendate: "1980-6-16", url:"https://eiga.com/movie/48946/"},
+			{sn: 5, genre: "ACTION", title: "ミッション：インポッシブル", opendate: "1996-5-22", url:"https://eiga.com/movie/29278/"},
+		]
+	},
+	filters: {
+		filter_date: function(date){
+			var _date = date.split('-');
+			return _date[0] + '年' + _date[1] + '月' + _date[2] + '日';
+		}
+	},
+	methods:{
+	}
+});
+</code></pre>
+
+
+
+<div class="jumbotron">
+	<h3>結果：</h3><br>
+
+
+
+	<!-- #app -->
+	<div id="app">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>番号</th>
+					<th>ジャンル</th>
+					<th>タイトル</th>
+					<th>公開日</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="(item, index) in list" v-bind:key="item.sn">
+					<td>{{ item.sn }}</td>
+					<td>{{ item.genre }}</td>
+					<td>
+						<a v-bind:href="item.url" target="_blank">{{ item.title }}</a>
+					</td>
+					<td>{{ item.opendate | filter_date }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- /#app -->
+
+
+</div>
+
+
+
+<script>
+// 特殊文字をエスケープせずにHTMLのソースコードをそのまま表示させる
+// https://bit.ly/3kKtalN
+document.querySelectorAll('pre > code').forEach(function(elem){
+	elem.textContent = elem.innerHTML.trim();
+});
+</script>
+
+
+
+</body>
+
+<script>
+var app = new Vue({
+	el: '#app',
+	data:{
+		list:[
+			{sn: 1, genre: "SF", title: "スターウォーズ", opendate: "1977-5-25", url:"https://eiga.com/movie/45857/"},
+			{sn: 2, genre: "HORROR", title: "シャイニング", opendate: "1980-5-23", url:"https://eiga.com/movie/14352/"},
+			{sn: 3, genre: "DRAMA", title: "スタンド・バイ・ミー", opendate: "1986-8-22", url:"https://eiga.com/movie/45887/"},
+			{sn: 4, genre: "COMEDY", title: "ブルース・ブラザース", opendate: "1980-6-16", url:"https://eiga.com/movie/48946/"},
+			{sn: 5, genre: "ACTION", title: "ミッション：インポッシブル", opendate: "1996-5-22", url:"https://eiga.com/movie/29278/"},
+		]
+	},
+	filters: {
+		filter_date: function(date){
+			var _date = date.split('-');
+			return _date[0] + '年' + _date[1] + '月' + _date[2] + '日';
+		}
+	},
+	methods:{
+	}
+});
+</script>
+</html>

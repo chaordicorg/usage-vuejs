@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>sample-03</title>
+	<script>window.Promise || document.write('<script src="//www.promisejs.org/polyfills/promise-7.0.4.min.js"><\/script>');</script>
+
+	<!--* vue.js *-->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- vue用ajaxライブラリ -->
+
+	<!--* bootstrap-vue
+		https://bootstrap-vue.org/ *-->
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+
+	<!--* highlight.js
+		https://highlightjs.org/
+		https://qiita.com/tadnakam/items/99088d78512a20e75ff3 *-->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/railscasts.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+	<script>
+	hljs.configure({
+		tabReplace: '    ', // スペース4つ
+	})
+	hljs.initHighlightingOnLoad();
+	</script>
+
+	<style>
+	</style>
+</head>
+<body>
+<div class="container">
+	<h5>■ Vue.jsの基礎</h5>
+	<section>
+		| <a href="sample-01.html">sample-01</a> |
+		  <a href="sample-02.html">sample-02</a> |
+		  sample-03 |
+		  <a href="bootstrap-vue.html">bootstrap-vue</a> |
+	</section>
+	<h1>sample-03：条件分岐とスタイルのバインディング</h1>
+
+<p>headにCDNで開発バージョンのVue2を読み込む。※公開時にはエラー出力されない本番用を使う</p>
+<pre><code>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</code></pre>
+
+<p>「v-if="条件"」で、条件が真の時表示</p>
+<p>「v-if」の条件が満たされなかった場合「v-else」が表示</p>
+<p>v-bind:class="{ スタイル: リアクティブ・データ}"―リアクティブ・データが真の時スタイルが適用される</p>
+<pre><code>
+<div id="app">
+	<p v-if="is">● リアクティブ・データ「is」がtrueの時表示されます</p>
+	<p v-if="is == 'a'">● リアクティブ・データ「is」が「a」の時表示されます</p>
+	<p v-if="is == 'b'">● リアクティブ・データ「is」が「b」の時表示されます</p>
+	<p v-if="is == 'c'">● リアクティブ・データ「is」が「c」の時表示されます</p>
+	<p v-else>● 「v-if」の条件が満たされなかった場合「v-else」が表示されます</p>
+	<p><input type="text" v-model="is"></p>
+	<br><br>
+
+	<p class="box" v-bind:class="{ act_bg: is_act_bg}">● リアクティブ・データ「is_act_bg」がtrueの時「.act_bg」が有効になる</p>
+	<p class="box" v-bind:class="{ act_text: is_act_text}">● リアクティブ・データ「is_act_text」がtrueの時「.act_text」が有効になる</p>
+	<p class="box" v-bind:class="{ act_bg: is_act_bg, act_text: is_act_text}">● 上記、２つの条件</p>
+	<p>is_act_red <input type="text" v-model="is_act_bg"></p>
+	<p>is_act_yellow <input type="text" v-model="is_act_text"></p>
+</div>
+</code></pre>
+
+<pre><code>
+<style>
+	.box{ padding:5px; border:solid 1px #000; }
+	.act_bg{ background: red; }
+	.act_text{ color: yellow; font-weight: bold; }
+</style>
+</code></pre>
+
+<p>filters: バインディング時にデータを加工する処理</p>
+<pre><code>
+var app = new Vue({
+	el: '#app',
+	data:{
+		is: true,
+		is_act_bg: false,
+		is_act_text: false
+	},
+	methods:{
+	}
+});
+</code></pre>
+
+
+
+<div class="jumbotron">
+	<h3>結果：</h3><br>
+
+
+	<style>
+		.box{ padding:5px; border:solid 1px #000; }
+		.act_bg{ background: red; }
+		.act_text{ color: yellow; font-weight: bold; }
+	</style>
+	<!-- #app -->
+	<div id="app">
+		<p v-if="is">● リアクティブ・データ「is」がtrueの時表示されます</p>
+		<p v-if="is == 'a'">● リアクティブ・データ「is」が「a」の時表示されます</p>
+		<p v-if="is == 'b'">● リアクティブ・データ「is」が「b」の時表示されます</p>
+		<p v-if="is == 'c'">● リアクティブ・データ「is」が「c」の時表示されます</p>
+		<p v-else>● 「v-if」の条件が満たされなかった場合「v-else」が表示されます</p>
+		<p><input type="text" v-model="is"></p>
+		<br><br>
+
+		<p class="box" v-bind:class="{ act_bg: is_act_bg}">● リアクティブ・データ「is_act_bg」がtrueの時「.act_bg」が有効になる</p>
+		<p class="box" v-bind:class="{ act_text: is_act_text}">● リアクティブ・データ「is_act_text」がtrueの時「.act_text」が有効になる</p>
+		<p class="box" v-bind:class="{ act_bg: is_act_bg, act_text: is_act_text}">● 上記、２つの条件</p>
+		<p>is_act_red <input type="text" v-model="is_act_bg"></p>
+		<p>is_act_yellow <input type="text" v-model="is_act_text"></p>
+	</div>
+	<!-- /#app -->
+
+
+</div>
+
+
+
+<script>
+// 特殊文字をエスケープせずにHTMLのソースコードをそのまま表示させる
+// https://bit.ly/3kKtalN
+document.querySelectorAll('pre > code').forEach(function(elem){
+	elem.textContent = elem.innerHTML.trim();
+});
+</script>
+
+
+
+</body>
+
+<script>
+var app = new Vue({
+	el: '#app',
+	data:{
+		is: true,
+		is_act_bg: false,
+		is_act_text: false
+	},
+	methods:{
+	}
+});
+</script>
+</html>

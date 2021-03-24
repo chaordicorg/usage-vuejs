@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>sample-01</title>
+	<script>window.Promise || document.write('<script src="//www.promisejs.org/polyfills/promise-7.0.4.min.js"><\/script>');</script>
+
+	<!--* vue.js *-->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- vue用ajaxライブラリ -->
+
+	<!--* bootstrap-vue
+		https://bootstrap-vue.org/ *-->
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+
+	<!--* highlight.js
+		https://highlightjs.org/
+		https://qiita.com/tadnakam/items/99088d78512a20e75ff3 *-->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/railscasts.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+	<script>
+	hljs.configure({
+		tabReplace: '    ', // スペース4つ
+	})
+	hljs.initHighlightingOnLoad();
+	</script>
+
+	<style>
+	.skyblue{
+		background: skyblue;
+		height: 100px;
+		text-align: center;
+		line-height: 100px;
+	}
+	.pink{
+		background: pink;
+		height: 100px;
+		text-align: center;
+		line-height: 100px;
+	}
+	</style>
+</head>
+<body>
+<div class="container">
+	<h5>■ Vue.jsの基礎</h5>
+	<section>
+		| <a href="sample-01.html">sample-01</a> |
+		  <a href="sample-02.html">sample-02</a> |
+		  <a href="sample-03.html">sample-03</a> |
+		  bootstrap-vue |
+	</section>
+	<h1>sample-01：bootstrap-vueのテスト</h1>
+
+
+
+
+	 <b-alert show>Default Alert</b-alert>
+
+
+	<div>
+		<b-tabs content-class="mt-3">
+			<b-tab title="First" active><p>I'm the first tab</p></b-tab>
+			<b-tab title="Second"><p>I'm the second tab</p></b-tab>
+			<b-tab title="Disabled" disabled><p>I'm a disabled tab!</p></b-tab>
+		</b-tabs>
+	</div>
+
+
+	<div class="text-center my-3">
+		<b-button v-b-popover.hover="'I am popover content!'" title="Popover Title">Hover Me</b-button>
+	</div>
+
+	<div>
+		<b-container fluid>
+			<b-row class="text-center">
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.top="'Popover!'" variant="primary">Top</b-button>
+				</b-col>
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.right="'Popover!'" variant="primary">Right</b-button>
+				</b-col>
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.left="'Popover!'" variant="primary">Left</b-button>
+				</b-col>
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.bottom="'Popover!'" variant="primary">Bottom</b-button>
+				</b-col>
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.topright="'Popover!'" variant="primary">Top right</b-button>
+				</b-col>
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.topleft="'Popover!'" variant="primary">Top left</b-button>
+				</b-col>
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.bottomright="'Popover!'" variant="primary">Bottom right</b-button>
+				</b-col>
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.bottomleft="'Popover!'" variant="primary">Bottom left</b-button>
+				</b-col>
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.lefttop="'Popover!'" variant="primary">Left top</b-button>
+				</b-col>
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.leftbottom="'Popover!'" variant="primary">Left bottom</b-button>
+				</b-col>
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.righttop="'Popover!'" variant="primary">right top</b-button>
+				</b-col>
+				<b-col md="3" class="py-3">
+					<b-button v-b-popover.hover.rightbottom="'Popover!'" variant="primary">right bottom</b-button>
+				</b-col>
+			</b-row>
+		</b-container>
+	</div>
+	<h2>ボタン</h2>
+	<a href="#" class="btn btn-primary" role="button">btn-primary</a>
+	<a href="#" class="btn btn-secondary" role="button">btn-secondary</a>
+	<a href="#" class="btn btn-success" role="button">btn-success</a>
+	<a href="#" class="btn btn-info" role="button">btn-info</a>
+	<a href="#" class="btn btn-warning" role="button">btn-warning</a>
+	<a href="#" class="btn btn-danger" role="button">btn-danger</a>
+	<a href="#" class="btn btn-light" role="button">btn-light</a>
+	<a href="#" class="btn btn-dark" role="button">btn-dark</a>
+	<br><br>
+	<h2>ボタンの大きさ</h2>
+	<a href="#" class="btn btn-info btn-sm" role="button">btn-sm</a>
+	<a href="#" class="btn btn-info" role="button">btn(通常)</a>
+	<a href="#" class="btn btn-info btn-lg" role="button">btn-lg</a>
+
+	<a href="#" class="btn btn-info btn-block btn-sm" role="button">btn-block + btn-sm</a>
+	<a href="#" class="btn btn-info btn-block" role="button">btn-block(通常)</a>
+	<a href="#" class="btn btn-info btn-block btn-lg" role="button">btn-lg + btn-lg</a>
+
+
+	<h2>ドロップダウンメニュー</h2>
+	<div class="dropdown">
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			各コース詳細はこちら
+			<span class="caret"></span>
+		</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			<a href="#" class="dropdown-item">6ヶ月コース</a>
+			<a href="#" class="dropdown-item">1ヶ月コース</a>
+			<a href="#" class="dropdown-item">マンツーマンコース</a>
+		</div>
+	</div>
+
+
+	<h2>ページネーション</h2>
+	<nav aria-label="Page Navigation">
+		<ul class="pagination">
+		<li class="page-item">
+				<a  class="page-link" href="#" aria-label="Previous Page">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+		<li class="page-item"><a class="page-link" href="#">1</a></li>
+		<li class="page-item"><a class="page-link" href="#">2</a></li>
+		<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item"><a class="page-link" href="#">4</a></li>
+		<li class="page-item"><a class="page-link" href="#">5</a></li>
+		<li class="page-item">
+				<a href="#"  class="page-link" aria-label="Next Page">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+
+
+	<h2>ボタンのグループ化</h2>
+	<div class="btn-group" role="group" aria-label="...">
+		<button type="button" class="btn btn-default">6ヶ月コース</button>
+		<button type="button" class="btn btn-primary">1ヶ月コース</button>
+		<button type="button" class="btn btn-success">マンツーマンコース</button>
+		<button type="button" class="btn btn-info">HTMLセミナー</button>
+		<button type="button" class="btn btn-warning">WordPressセミナー</button>
+		<button type="button" class="btn btn-danger">SEOセミナー</button>
+	</div>
+
+	<h2>フォーム</h2>
+	<form>
+		<div class="form-group">
+			<label for="name">氏名</label>
+			<input type="email" class="form-control" id="name" placeholder="ウェブスト太郎">
+		</div>
+		<div class="form-group">
+			<label for="message">メッセージ</label>
+			<textarea name="message" rows="8" cols="80" class="form-control"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="date">日付</label>
+			<select class="form-control" name="date">
+				<option value="2017年1月">2017年10月</option>
+				<option value="2017年1月">2017年11月</option>
+				<option value="2017年1月">2017年12月</option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary">登録する</button>
+	</form>
+
+
+	<h2>インプット・グループ</h2>
+	<div class="input-group">
+		<span class="input-group-addon">ユーザー名</span>
+		<input type="text" class="form-control" placeholder="ウェブスト太郎">
+	</div><br/>
+
+	<div class="input-group">
+		<input type="text" class="form-control" placeholder="abc123">
+		<span class="input-group-addon" id="basic-addon2">@example.com</span>
+	</div><br/>
+
+	<div class="input-group">
+		<span class="input-group-addon">\</span>
+		<input type="text" class="form-control">
+		<span class="input-group-addon">00</span>
+	</div>
+
+	<h2>テキストカラー</h2>
+	<p class="text-muted">ウェブストエイトはWebスクールです</p>
+	<p class="text-primary">ウェブストエイトはWebスクールです</p>
+	<p class="text-success">ウェブストエイトはWebスクールです</p>
+	<p class="text-info">ウェブストエイトはWebスクールです</p>
+	<p class="text-warning">ウェブストエイトはWebスクールです</p>
+	<p class="text-danger">ウェブストエイトはWebスクールです</p>
+
+	<h2>背景カラー</h2>
+	<p class="bg-primary">ウェブストエイトはWebスクールです</p>
+	<p class="bg-success">ウェブストエイトはWebスクールです</p>
+	<p class="bg-info">ウェブストエイトはWebスクールです</p>
+	<p class="bg-warning">ウェブストエイトはWebスクールです</p>
+	<p class="bg-danger">ウェブストエイトはWebスクールです</p>
+
+
+
+
+
+	<h2>ウェブストエイトの最新情報</h2>
+	<!-- 以下タブの表示設定 -->
+	<ul id="myTabs" class="nav nav-tabs">
+		<li role="presentation" class="active"><a href="#home"  aria-controls="home" role="tab" data-toggle="tab">最新ニュース</a>
+		</li>
+		<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">セミナー情報</a></li>
+		<li role="presentation"><a href="#message" aria-controls="message" role="tab" data-toggle="tab">メディア掲載歴</a></li>
+	</ul>
+
+	<!-- Tab panes(以下、タブを押したときに表示する中身) -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="home">
+			<h2>SEO実績更新</h2>
+			<p>ウェブストエイトが「ホームページ作成セミナー」でSEO一位を獲得しました。(2017年9月調べ)</p>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="profile">
+			<h2>2018年1月のセミナー情報</h2>
+			<p>
+				2018年1月20日にワードプレスセミナーを開催します。
+				<br>
+				詳細は下記のページをご覧ください。
+			</p>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="message">
+			<h2>〇〇新聞に掲載されました</h2>
+			<p>
+				ウェブストエイトが〇〇新聞に掲載されました。
+				<br>
+				詳細はこちらをご覧ください。
+			</p>
+		</div>
+	</div>
+
+
+
+
+	<h1>グリッドシステム</h1>
+	<h3>12分割(1*12)</h3>
+	<div class="row">
+		<div class="col-lg-1 skyblue">
+			col-lg-1
+		</div>
+		<div class="col-lg-1 pink">
+			col-lg-1
+		</div>
+		<div class="col-lg-1 skyblue">
+			col-lg-1
+		</div>
+		<div class="col-lg-1 pink">
+			col-lg-1
+		</div>
+		<div class="col-lg-1 skyblue">
+			col-lg-1
+		</div>
+		<div class="col-lg-1 pink">
+			col-lg-1
+		</div>
+		<div class="col-lg-1 skyblue">
+			col-lg-1
+		</div>
+		<div class="col-lg-1 pink">
+			col-lg-1
+		</div>
+		<div class="col-lg-1 skyblue">
+			col-lg-1
+		</div>
+		<div class="col-lg-1 pink">
+			col-lg-1
+		</div>
+		<div class="col-lg-1 skyblue">
+			col-lg-1
+		</div>
+		<div class="col-lg-1 pink">
+			col-lg-1
+		</div>
+	</div>
+	<br>
+	<h3>4分割(3*4)</h3>
+	<div class="row">
+		<div class="col-lg-3 skyblue">
+			col-lg-3
+		</div>
+		<div class="col-lg-3 pink">
+			col-lg-3
+		</div>
+		<div class="col-lg-3 skyblue">
+			col-lg-3
+		</div>
+		<div class="col-lg-3 pink">
+			col-lg-3
+		</div>
+	</div>
+	<br>
+	<h3>2分割(2*6)</h3>
+	<div class="row">
+		<div class="col-lg-6 skyblue">
+			col-lg-6
+		</div>
+		<div class="col-lg-6 pink">
+			col-lg-6
+		</div>
+	</div>
+
+	<h2>テーブル</h2>
+	<table class="table">
+		<tr><td>table</td><td>ブートストラップ用のスタイルのtableを使う(必須)</td></tr>
+		<tr><td>table-striped</td><td>1行ずつストライプのように背景色がつきます</td></tr>
+		<tr><td>table-bordered</td><td>テーブルとセルの全てのサイドに線をつける</td></tr>
+		<tr><td>table-condensed</td><td>テーブルのセルの余白を狭くする</td></tr>
+		<tr><td>table-hover</td><td>マウスがホバーした時に背景色が変わる</td></tr>
+		<tr><td>(外側のdivタグで利用する)table-responsive</td><td>コンテンツ幅を超える部分はスクロールできるようにする</td></tr>
+	</table>
+
+	<h2>テキスト揃えの設定</h2>
+	<p class="text-left" style="border:1px solid black">class="text-left"</p>
+	<p class="text-right" style="border:1px solid black">class="text-right"</p>
+	<p class="text-center" style="border:1px solid black">class="text-center"</p>
+
+
+	<h2>タブ（動かない）</h2>
+	<h2>株式会社WEBST8の最新情報</h2>
+	<!-- 以下タブの表示設定 -->
+	<ul id="myTabs" class="nav nav-tabs">
+	  <li role="presentation" class="active"><a href="#home"  aria-controls="home" role="tab" data-toggle="tab" class="nav-link active">最新ニュース</a>
+	  </li>
+	  <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" class="nav-link">セミナー情報</a></li>
+	  <li role="presentation"><a href="#message" aria-controls="message" role="tab" data-toggle="tab" class="nav-link">メディア掲載歴</a></li>
+	</ul>
+
+	<!-- Tab panes(以下、タブを押したときに表示する中身) -->
+	<div class="tab-content p-2 ">
+	  <div role="tabpanel" class="tab-pane active fade show" id="home">
+		<h3>SEO実績更新</h3>
+		<p>ウェブストエイトが「ホームページ作成セミナー」でSEO一位を獲得しました。(2017年9月調べ)</p>
+	  </div>
+	  <div role="tabpanel" class="tab-pane fade" id="profile">
+		<h3>2018年1月のセミナー情報</h3>
+		<p>
+		  2018年1月20日にワードプレスセミナーを開催します。
+		  <br>
+		  詳細は下記のページをご覧ください。
+		</p>
+	  </div>
+	  <div role="tabpanel" class="tab-pane fade" id="message">
+		<h3>〇〇新聞に掲載されました</h3>
+		<p>
+		  ウェブストエイトが〇〇新聞に掲載されました。
+		  <br>
+		  詳細はこちらをご覧ください。
+		</p>
+	  </div>
+	</div>
+  </div>
+
+	<h2>パネル</h2>
+	<div class="panel panel-default">
+		<div class="panel-heading">スクールコース案内</div>
+		<div class="panel-body">
+			開講日：毎週火・金・土曜日
+			<br>
+			場所：大阪南堀江
+			<br>
+			コース：スタンダード48時間コース
+		</div>
+	</div>
+
+	<div class="panel panel-info">
+		<div class="panel-heading">スクールコース案内</div>
+		<div class="panel-body">コース：ライト26時間コース</div>
+	</div>
+
+	<div class="panel panel-success">
+		<div class="panel-heading">スクールコース案内</div>
+		<div class="panel-body">コース：スタンダード48時間コース</div>
+	</div>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">スクールコース案内</div>
+		<div class="panel-body">コース：プロフェッショナル80時間コース</div>
+	</div>
+
+	<div class="panel panel-warning">
+		<div class="panel-heading">スクールコース案内</div>
+		<div class="panel-body">コース：単発マンツーマンレッスン</div>
+	</div>
+
+	<div class="panel panel-danger">
+		<div class="panel-heading">スクールコース案内</div>
+		<div class="panel-body">コース：出張研修</div>
+	</div>
+
+	<h2>グラフィックアイコン</h2>
+	<h1 class="text-center">Webst8</h1>
+	<div class="container">
+		<h2><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>おすすめポイント</h2>
+		<h2><span class="glyphicon glyphicon-check" aria-hidden="true"></span>確認項目</h2>
+		<h2><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>お問い合わせはこちら</h2>  
+	</div>
+
+	<h2>ラベル</h2>
+	<span class="label label-default">Default</span>
+	<span class="label label-primary">Primary</span>
+	<span class="label label-success">Success</span>
+	<span class="label label-info">Info</span>
+	<span class="label label-warning">Warning</span>
+	<span class="label label-danger">Danger</span>
+
+	<h2>バッジ</h2>
+	<button type="button" name="button" class="btn btn-primary">メッセージが来ています <span class="badge">3</span></button>
+
+	<h2>埋め込み</h2>
+	<div class="well">
+	<h1>Webst8</h1>
+	<p>大阪のWebスクール・個別指導のホームページ作成スクール | ウェブストエイト</p>
+	</div>
+
+	<h2>ジャンボトロン</h2>
+	<div class="jumbotron">
+		<h1>Webst8</h1>
+		<p>大阪のWebスクール・個別指導のホームページ作成スクール | ウェブストエイト</p>
+		<p><a class="btn btn-primary btn-lg" href="./jumbotron.html" role="button">もっと詳しく</a></p>
+	</div>
+
+	<h2>アラート</h2>
+	<div class="alert alert-success" role="alert">
+		<strong>success</strong>：　WEBST8の会員システム登録に成功しました。
+	</div>
+	<div class="alert alert-info" role="alert">
+		<strong>info</strong>：　WEBST8から新着のお知らせが来ています。
+	</div>
+	<div class="alert alert-warning" role="alert">
+		<strong>warning</strong>：　お客様の会員有効期間はあと一ヶ月になります。
+	</div>
+	<div class="alert alert-danger" role="alert">
+		<strong>danger</strong>：　有効期限が切れました。現在会員システムをご利用できません。
+	</div>
+
+
+</div>
+
+
+
+
+
+
+</body>
+
+<script>
+var app = new Vue({
+	el: '#app',
+	data:{
+	},
+	methods:{
+	}
+});
+</script>
+</html>

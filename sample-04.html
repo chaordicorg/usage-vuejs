@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>sample-04</title>
+	<script>window.Promise || document.write('<script src="//www.promisejs.org/polyfills/promise-7.0.4.min.js"><\/script>');</script>
+
+	<!--* vue.js *-->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- vue用ajaxライブラリ -->
+
+	<!--* bootstrap-vue
+		https://bootstrap-vue.org/ *-->
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+	<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+
+	<!--* highlight.js
+		https://highlightjs.org/
+		https://qiita.com/tadnakam/items/99088d78512a20e75ff3 *-->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/railscasts.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+	<script>
+	hljs.configure({
+		tabReplace: '    ', // スペース4つ
+	})
+	hljs.initHighlightingOnLoad();
+	</script>
+
+	<style>
+	</style>
+</head>
+<body>
+<div class="container">
+	<h5>■ Vue.jsの基礎</h5>
+	<section>
+		| <a href="sample-01.html">sample-01</a> |
+		  <a href="sample-02.html">sample-02</a> |
+		  <a href="sample-03.html">sample-03</a> |
+		  <a href="bootstrap-vue.html">bootstrap-vue</a> |
+	</section>
+	<h1>sample-03：トランジション</h1>
+
+<p>headにCDNで開発バージョンのVue2を読み込む。※公開時にはエラー出力されない本番用を使う</p>
+<pre><code>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</code></pre>
+
+<p>「v-if="条件"」で、条件が真の時表示</p>
+<p>「v-if」の条件が満たされなかった場合「v-else」が表示</p>
+<p>v-bind:class="{ スタイル: リアクティブ・データ}"―リアクティブ・データが真の時スタイルが適用される</p>
+<pre><code>
+
+</code></pre>
+
+<pre><code>
+<style>
+
+</style>
+</code></pre>
+
+<p>filters: バインディング時にデータを加工する処理</p>
+<pre><code>
+
+</code></pre>
+
+
+
+<div class="jumbotron">
+	<h3>結果：</h3><br>
+
+
+	<style>
+		.box{
+			width:100px;
+			height:100px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: yellow;
+		}
+
+		/* アニメーション中のスタイル */
+		.v-leave-active, .v-enter-active{
+			transition: opacity 1s;
+		}
+
+		/* 表示アニメーション */
+		.v-enter{ opacity: 0; }
+		.v-enter-to{ opacity: 1; }
+
+		/* 非表示アニメーション */
+		.v-leave { opacity: 1; }
+		.v-leave-to { opacity: 0; }
+
+		/* -- [top] Top slide -- */
+		.top-enter-active, .top-leave-active {
+			transform: translate(0px, 0px);
+			transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+		}
+
+		.top-enter, .top-leave-to {
+			transform: translateY(-100vh) translateY(0px);
+		}
+
+		/* -- [tl] Top Left Slide -- */
+		.topleft-enter-active, .topleft-leave-active {
+			transform: translate(0px, 0px);
+			transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+		}
+
+		.topleft-enter, .topleft-leave-to {
+			transform: translateY(-100vh) translateX(-100vh);
+		}
+
+		/* -- [tr] Top Right Slide --*/
+		.topRight-enter-active, .topRight-leave-active {
+			transform: translate(0px, 0px);
+			transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+		}
+
+		.topRight-enter, .topRight-leave-to {
+			transform: translateY(-100vh) translateX(100vh);
+		}
+
+		/* -- [bottom] Bottom Slide --*/
+		.bottom-enter-active, .bottom-leave-active {
+			transform: translate(0px, 0px);
+			transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+		}
+
+		.bottom-enter, .bottom-leave-to {
+			transform: translateY(100vh) translateY(0px);
+		}
+
+		/* -- [bl] Bottom Left Slide --*/
+		.v-enter-active, .bl-leave-active {
+			transform: translate(0px, 0px);
+			transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+		}
+
+		.bl-enter, .bl-leave-to {
+			transform: translateY(100vh) translateX(-100vh);
+		}
+
+		/* -- [br] Bottom Right Slide --*/
+		.br-enter-active, .br-leave-active {
+			transform: translate(0px, 0px);
+			transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+		}
+
+		.br-enter, .br-leave-to {
+			transform: translateY(100vh) translateX(100vh);
+		}
+
+		/* -- [left] Left Slide --*/
+		.left-enter-active, .left-leave-active {
+			transform: translate(0px, 0px);
+			transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+		}
+
+		.left-enter, .left-leave-to {
+			transform: translateX(-100vw) translateX(0px);
+		}
+
+		/* -- [right] Right Slide --*/
+		.right-enter-active, .right-leave-active {
+			transform: translate(0px, 0px);
+			transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+		}
+
+		.right-enter, .right-leave-to {
+			transform: translateX(100vw) translateX(0px);
+		}
+	</style>
+
+	<!-- #app -->
+	<div id="app">
+		<p><button class="btn btn-primary" v-on:click="click_btn('defult')">デフォルト</button></p>
+		<transition>
+			<div v-show="defult" class="box">BOX</div>
+		</transition>
+
+		<p><button class="btn btn-primary" v-on:click="click_btn('top')">[top] Top slide</button></p>
+		<transition name="top">
+			<div v-show="top" class="box">BOX-top</div>
+		</transition>
+
+		<p><button class="btn btn-primary" v-on:click="click_btn('tl')">[tl] Top Left Slide</button></p>
+		<transition name="tl">
+			<div v-show="tl" class="box">BOX-tl</div>
+		</transition>
+
+	</div>
+	<!-- /#app -->
+
+
+</div>
+
+
+
+<script>
+// 特殊文字をエスケープせずにHTMLのソースコードをそのまま表示させる
+// https://bit.ly/3kKtalN
+document.querySelectorAll('pre > code').forEach(function(elem){
+	elem.textContent = elem.xinnerHTML.trim();
+});
+</script>
+
+
+
+</body>
+
+<script>
+var app = new Vue({
+	el: '#app',
+	data:{
+		defult: false,
+		top: false,
+		tl: false,
+	},
+	methods:{
+		click_btn: function(key){
+			if (this[key]) this[key] = false;
+			else 		   this[key] = true;
+		}
+	}
+});
+</script>
+</html>
